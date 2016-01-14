@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>People in Group</title>
+    </h:head>
+    <h:body>
+        
+        <p:growl id="growl"  life="3000" />
+        <h:form id="PersonListForm">
+            <p:panel header="People">
+                <p:dataTable id="datalist" value="#{personController.persons}"  var="item"
+                             selectionMode="single"
+                             rowKey="#{item.id}">
+                    <p:column>
+                        <f:facet name="header"><h:outputText value="id"/></f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+                        <h:outputText value="#{item.firstname}"/>
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+                        <h:outputText value="#{item.lastname}"/>
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header"><h:outputText value="Birth Date"/></f:facet>
+                        <h:outputText value="#{item.birthdate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <!--
+                     <p:column>
+                        <f:facet name="header"><h:outputText value="TEST"/></f:facet>
+                        <h:outputText value="SHARPSIGN{personController.lastNameSearch}"/>
+                    </p:column>
+                    -->
+                    <p:column>
+                        <p:commandButton id="editButton" icon="ui-icon-plus" value="Edit"
+                                         actionListener="#{personController.prepareEdit(item.id)}"
+                                         update=":PersonListForm :PersonEditForm"
+                                         oncomplete="PF('PersonEditDialog').show()" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton id="deleteButton" icon="ui-icon-plus" value="Delete"
+                                         actionListener="#{personController.prepareDelete(item.id)}"
+                                         oncomplete="PF('PersonDeleteDialog').show()" />
+                    </p:column>
+                </p:dataTable>           
+            </p:panel>
+            <p:commandButton id="createButton" icon="ui-icon-plus"  value="Create"
+                             actionListener="#{personController.prepareCreate}"
+                             update=":PersonListForm"
+                             oncomplete="PF('PersonCreateDialog').show()"/>
+            
+<!--ASSIGNMENT--><!--ASSIGNMENT--><!--ASSIGNMENT--><!--ASSIGNMENT-->
+            <p:commandButton id="searchButton" icon="ui-icon-plus" value="Search" 
+                             oncomplete = "PF('PersonSearchDialog').show()"/>                       
+        </h:form>
+        
+<!-- **************************************DIALOGS*************************** -->    
+
+        <p:dialog id="PersonDialog1" widgetVar="PersonCreateDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="Create a Person">
+            <h:form id="PersonCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personController.current != null}">
+                        <p:outputLabel value="First Name" for="firstname" />
+                        <p:inputText id="firstname" value="#{personController.current.firstname}"
+                                     title="first name" required="true" requiredMessage="First Name is Required"/>
+                        
+                        <p:outputLabel value="Last Name" for="lastname" />
+                        <p:inputText id="lastname" value="#{personController.current.lastname}"
+                                     title="last name"/>
+                        
+                        <p:outputLabel value="Birth Date" for="birthdate" />
+                        <p:inputText id="birthdate" value="#{personController.current.birthdate}" title="birth date">
+                        <f:convertDateTime pattern="MM/dd/yyyy"/>
+                        </p:inputText>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personController.create()}" value="Save"
+                                     update=":PersonListForm:datalist,:growl" 
+                                     oncomplete="PF(PersonCreateDialog.hide() )"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+        
+        
+        <p:dialog id="PersonDialog2" widgetVar="PersonEditDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="Edit a Person">
+            <h:form id="PersonEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personController.current != null}">
+                        <p:outputLabel value="First Name" for="firstname" />
+                        <p:inputText id="firstname" value="#{personController.current.firstname}"
+                                     title="first name" required="true" requiredMessage="First Name is Required"/>
+                        
+                        <p:outputLabel value="Last Name" for="lastname" />
+                        <p:inputText id="lastname" value="#{personController.current.lastname}"
+                                     title="last name" />
+                        
+                        <p:outputLabel value="Birth Date" for="birthdate" />
+                        <p:inputText id="birthdate" value="#{personController.current.birthdate}" title="birth date">
+                        <f:convertDateTime pattern="MM/dd/yyyy"/>
+                        </p:inputText>
+                    </p:panelGrid>
+                    <p:commandButton id="saveEdit" actionListener="#{personController.edit()}" value="Save"
+                                     update=":PersonListForm,:growl"
+                                     oncomplete="PF(PersonEditDialog.hide() )"/>
+                    <p:commandButton value="Cancel" onclick="PersonEditDialog.hide()"/>
+                    
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+        
+<!--ASSIGNMENT--><!--ASSIGNMENT--><!--ASSIGNMENT--><!--ASSIGNMENT-->
+        
+        <p:dialog id="PersonDialog3" widgetVar="PersonSearchDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="Search a Person By Lastname">
+            <h:form id="PersonSearchForm">
+                <h:panelGroup id="display">
+                    
+                    <p:outputLabel value="Last Name" for="lastname" />
+                    <p:inputText id="lastname" value="#{personController.lastNameSearch}"
+                                     title="last name" required="true" requiredMessage="Last Name is Required"/>
+                        
+                    
+                    <p:commandButton id="dialogSearchButton" icon="ui-icon-plus" value="Search By Last Name"
+                                     actionListener="#{personController.search()}" 
+                                     update=":PersonListForm:datalist,:growl" 
+                                     oncomplete = "PF('PersonSearchDialog').hide()" />
+                                     <!--update=":PersonListForm:datalist,:growl" -->
+                                     
+                    <p:commandButton value="Cancel" onclick="PersonSearchDialog.hide()"/>
+                    
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+<!--ASSIGNMENT--><!--ASSIGNMENT--><!--ASSIGNMENT--><!--ASSIGNMENT-->
+          <p:dialog id="PersonDialog4" widgetVar="PersonDeleteDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="Delete Dialog">
+                        <h:form id="PersonDeleteDialog">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{personController.current != null}">
+                                    <p:outputLabel value="Are You Sure?"  />
+                                </p:panelGrid>
+                                 <p:commandButton id="deleteButton" icon="ui-icon-plus" value="Delete"
+                                                     actionListener="#{personController.delete()}"
+                                                     update=":PersonListForm:datalist,:growl" 
+                                                     oncomplete = "PF('PersonDeleteDialog').hide()"
+                                                     />
+                                <p:commandButton value="Cancel" onclick="PersonDeleteDialog.hide()"/>
+
+                            </h:panelGroup>
+                        </h:form>
+           </p:dialog>    
+    </h:body>
+</html>
+
