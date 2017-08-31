@@ -23,9 +23,13 @@ other clients.
 Your service will be very simple. Clients will be able to **add** persons to the list, **update** persons in the list, **delete** persons
 from the list, **get a list of all persons** and **get a person by id**:
 
-## Files In Project Written by Mike Benton:
-* JSFClient_RESTful-PersonProject-/src/main/java/org/usd/csci/person/data/Person.java
+## Code In Project Written:
+* JSFClient_RESTful-PersonProject-/src/main/java/org/usd/csci/person/data/**Person.java**
   * Create constants to represent JSON keys for a Person Object
   * Create a method in the Person class "toJSON()" that returns a string representing a person in JSON format
-  
+* JSFClient_RESTful-PersonProject-/src/main/java/org/usd/csci/person/data/**PersonClient.java**
+  * Add a GET method "Persons()" which will return all persons - Line 60 
+* JSFClient_RESTful-PersonProject-/src/main/java/org/usd/csci/person/jsf/**PersonController.java**
+  * Write a "constructList()" method that takes a String representing a list of Persons and adds Persons to a HashMap
+
 
