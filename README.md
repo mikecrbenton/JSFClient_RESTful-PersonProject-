@@ -1,5 +1,5 @@
 # JSFClient_RESTful-PersonProject-
-CSC 470 Software Engineering // A baisc RESTful client that accesses RESTful_API(PersonProject)
+CSC 470 Software Engineering // A introduction to a RESTful client that accesses RESTful_API(PersonProject)
 
 ## Assignment Directive:
 You will create a RESTful service that will allow clients to store person object in a list of persons that we will keep in memory
