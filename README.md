@@ -1,5 +1,5 @@
 # JSFClient_RESTful-PersonProject-
-CSC 470 Software Engineering // An introduction to a RESTful client that accesses RESTful_API(PersonProject)
+CSC 470 Software Engineering // An introduction REST amd JSON
 
 ## Assignment Directive:
 You will create a RESTful service that will allow clients to store person object in a list of persons that we will keep in memory
@@ -10,9 +10,7 @@ the primary advantage is that you can retrieve object on constant time i.e. O(1)
 Your RESTful service class will be a Singleton, meaning that there will be one instance of the class to service all clients. 
 Because we need to worry about multiple clients accessing our person list at the same time, we will implement it as a ConcurrentHashMap. 
 ConcurrentHashMap is introduced as an alternative of HashMap and provided all functions supported by HashMap with additional feature 
-called "concurrency level", which allows ConcurrentHashMap to partition Map. ConcurrentHashMap allows multiple readers to read concurrently
-without any blocking. This is achieved by partitioning Map into different parts based on concurrency level and locking only a portion of 
-Map during updates. 
+called "concurrency level", which allows ConcurrentHashMap to partition Map. ConcurrentHashMap allows multiple readers to read concurrently without any blocking. This is achieved by partitioning Map into different parts based on concurrency level and locking only a portion of Map during updates. 
 
 Your service will auto-generate the person id’s before they are placed in the list. Again, because we have to worry about multiple clients 
 entering person data simultaneously, we will use an AtomicInteger to represent our person id. The AtomicInteger class has a number of uses,
