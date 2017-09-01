@@ -25,11 +25,11 @@ from the list, **get a list of all persons** and **get a person by id**:
 
 ## Code In Project Written:
 * https://github.com/mikecrbenton/JSFClient_RESTful-PersonProject-/blob/master/src/main/java/org/usd/csci/person/data/Person.java
-  * Create constants to represent JSON keys for a Person Object
-  * Create a method in the Person class "toJSON()" that returns a string representing a person in JSON format
+  * Create constants to represent JSON keys for a Person Object ( Line 27 ) 
+  * Create a method in the Person class "toJSON()" that returns a string representing a person in JSON format ( Line 40 )
 * https://github.com/mikecrbenton/JSFClient_RESTful-PersonProject-/blob/master/src/main/java/org/usd/csci/person/data/PersonClient.java
-  * Add a GET method "Persons()" which will return all persons - Line 60 
+  * Add a GET method "Persons()" which will return all persons ( Line 60 ) 
 * https://github.com/mikecrbenton/JSFClient_RESTful-PersonProject-/blob/master/src/main/java/org/usd/csci/person/jsf/PersonController.java
-  * Write a "constructList()" method that takes a String representing a list of Persons and adds Persons to a HashMap
+  * Write a "constructList()" method that takes a String representing a list of Persons and adds Persons to a HashMap ( Line 70 )
 
 
