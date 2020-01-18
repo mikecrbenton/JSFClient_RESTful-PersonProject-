@@ -1,5 +1,5 @@
 # JSFClient_RESTful-PersonProject-
-CSC 470 Software Engineering // An introduction REST amd JSON
+CSC 470 Software Engineering // An introduction to REST amd JSON. Much of the project codebase is boilerplate, frameworks and project walkthrough.  All code written for the assignment is indexed and labeled under the "Code Written" section. 
 
 ## Assignment Directive:
 You will create a RESTful service that will allow clients to store person object in a list of persons that we will keep in memory
@@ -21,7 +21,7 @@ other clients.
 Your service will be very simple. Clients will be able to **add** persons to the list, **update** persons in the list, **delete** persons
 from the list, **get a list of all persons** and **get a person by id**:
 
-## Code In Project Written:
+## Code Written:
 * https://github.com/mikecrbenton/JSFClient_RESTful-PersonProject-/blob/master/src/main/java/org/usd/csci/person/data/Person.java
   * Create constants to represent JSON keys for a Person Object ( Line 27 ) 
   * Create a method in the Person class "toJSON()" that returns a string representing a person in JSON format ( Line 40 )
